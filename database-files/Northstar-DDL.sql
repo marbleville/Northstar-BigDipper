@@ -114,7 +114,7 @@ CREATE TABLE Booking (
     booking_id INT PRIMARY KEY,
     listing_id INT NOT NULL,
     vendor_id INT NOT NULL,
-    trip_id INT NOT NULL,
+    trip_id INT,
     promotion_id INT,
     booking_date DATE,
     booking_status VARCHAR(50),
@@ -135,7 +135,7 @@ CREATE TABLE Booking (
 
 CREATE TABLE Funding_Request (
     request_id INT PRIMARY KEY,
-    trip_id INT NOT NULL,
+    trip_id INT,
     group_size INT,
     start_date DATE,
     end_date DATE,
@@ -147,7 +147,7 @@ CREATE TABLE Funding_Request (
 );
 
 CREATE TABLE Trip_Traveler (
-    trip_id INT NOT NULL,
+    trip_id INT,
     traveler_id INT NOT NULL,
     start_date DATE,
     end_date DATE,
@@ -175,7 +175,7 @@ CREATE TABLE Traveler_Booking (
 CREATE TABLE Traveler_Preference (
     traveler_id INT NOT NULL,
     preference VARCHAR(100) NOT NULL,
-    trip_id INT NOT NULL,
+    trip_id INT,
     PRIMARY KEY (traveler_id, preference),
     FOREIGN KEY (traveler_id) REFERENCES Traveler(traveler_id)
         ON UPDATE CASCADE
@@ -198,7 +198,7 @@ CREATE TABLE Traveler_Vote (
     traveler_id INT NOT NULL,
     listing_id INT NOT NULL,
     vote_value INT NOT NULL,
-    trip_id INT NOT NULL,
+    trip_id INT,
     PRIMARY KEY (traveler_id, listing_id),
     FOREIGN KEY (traveler_id) REFERENCES Traveler(traveler_id)
         ON UPDATE CASCADE

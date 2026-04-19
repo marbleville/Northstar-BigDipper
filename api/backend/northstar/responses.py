@@ -28,6 +28,34 @@ def validation_error(errors):
     return jsonify(payload), 400
 
 
+def success(payload, status=200):
+    return jsonify(_make_json_safe(payload)), status
+
+
+def database_error(error, *, endpoint=None, method=None):
+    payload = {
+        "error": "database_error",
+        "message": str(error),
+    }
+    if endpoint:
+        payload["endpoint"] = endpoint
+    if method:
+        payload["method"] = method
+    return jsonify(_make_json_safe(payload)), 500
+
+
+def internal_error(message, *, endpoint=None, method=None):
+    payload = {
+        "error": "internal_error",
+        "message": message,
+    }
+    if endpoint:
+        payload["endpoint"] = endpoint
+    if method:
+        payload["method"] = method
+    return jsonify(payload), 500
+
+
 def not_implemented(endpoint, method, validated_input, query_payload):
     payload = {
         "error": "not_implemented",

@@ -37,8 +37,8 @@ INSERT INTO Listing VALUES
 
 -- Booking
 INSERT INTO Booking VALUES
-(1, 1, 1, 1, '2026-04-05', 'Confirmed', TRUE),
-(2, 2, 2, 2, '2026-04-06', 'Pending', TRUE);
+(1, 1, 1, 1, 1, '2026-04-05', 'Confirmed', TRUE),
+(2, 2, 2, 2, 2, '2026-04-06', 'Pending', TRUE);
 
 -- Funding_Request
 INSERT INTO Funding_Request VALUES
@@ -57,8 +57,8 @@ INSERT INTO Traveler_Booking VALUES
 
 -- Traveler_Preference
 INSERT INTO Traveler_Preference VALUES
-(1, 'Food'),
-(2, 'Adventure');
+(1, 'Food', 1),
+(2, 'Adventure', 2);
 
 -- Listing_Amenity
 INSERT INTO Listing_Amenity VALUES
@@ -67,5 +67,5 @@ INSERT INTO Listing_Amenity VALUES
 
 -- Traveler_Vote
 INSERT INTO Traveler_Vote VALUES
-(1, 1, 5),
-(2, 2, 4);
+(1, 1, 5, 1),
+(2, 2, 4, 2);
