@@ -1,4 +1,4 @@
-from backend.northstar.blueprint import listing_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import (
     VENDOR_ID_PATH,
     VENDOR_LISTING_CREATE_BODY,
@@ -8,7 +8,7 @@ from backend.northstar.endpoints import vendor_listings as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@listing_bp.route("/vendors/<int:vendor_id>/listings", methods=["GET"])
+@northstar.route("/vendors/<int:vendor_id>/listings", methods=["GET"])
 def get_vendor_listings_route(vendor_id):
     return handle_request(
         endpoint="/vendors/{vendorId}/listings",
@@ -20,7 +20,7 @@ def get_vendor_listings_route(vendor_id):
     )
 
 
-@listing_bp.route("/vendors/<int:vendor_id>/listings", methods=["POST"])
+@northstar.route("/vendors/<int:vendor_id>/listings", methods=["POST"])
 def create_vendor_listings_route(vendor_id):
     return handle_request(
         endpoint="/vendors/{vendorId}/listings",

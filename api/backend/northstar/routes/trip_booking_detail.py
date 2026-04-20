@@ -1,10 +1,10 @@
-from backend.northstar.blueprint import booking_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import BOOKING_UPDATE_BODY, TRIP_BOOKING_PATH
 from backend.northstar.endpoints import trip_booking_detail as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@booking_bp.route("/trips/<int:trip_id>/bookings/<int:booking_id>", methods=["GET"])
+@northstar.route("/trips/<int:trip_id>/bookings/<int:booking_id>", methods=["GET"])
 def get_trip_booking_detail_route(trip_id, booking_id):
     return handle_request(
         endpoint="/trips/{tripId}/bookings/{bookingId}",
@@ -15,7 +15,7 @@ def get_trip_booking_detail_route(trip_id, booking_id):
     )
 
 
-@booking_bp.route("/trips/<int:trip_id>/bookings/<int:booking_id>", methods=["PUT"])
+@northstar.route("/trips/<int:trip_id>/bookings/<int:booking_id>", methods=["PUT"])
 def update_trip_booking_detail_route(trip_id, booking_id):
     return handle_request(
         endpoint="/trips/{tripId}/bookings/{bookingId}",
@@ -27,7 +27,7 @@ def update_trip_booking_detail_route(trip_id, booking_id):
     )
 
 
-@booking_bp.route("/trips/<int:trip_id>/bookings/<int:booking_id>", methods=["DELETE"])
+@northstar.route("/trips/<int:trip_id>/bookings/<int:booking_id>", methods=["DELETE"])
 def delete_trip_booking_detail_route(trip_id, booking_id):
     return handle_request(
         endpoint="/trips/{tripId}/bookings/{bookingId}",

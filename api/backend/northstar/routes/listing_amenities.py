@@ -1,4 +1,4 @@
-from backend.northstar.blueprint import listing_amenity_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import (
     LISTING_AMENITIES_ADD_BODY,
     LISTING_AMENITIES_DELETE_BODY,
@@ -8,7 +8,7 @@ from backend.northstar.endpoints import listing_amenities as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@listing_amenity_bp.route("/listings/<int:listing_id>/amenities", methods=["GET"])
+@northstar.route("/listings/<int:listing_id>/amenities", methods=["GET"])
 def get_listing_amenities_route(listing_id):
     return handle_request(
         endpoint="/listings/{listingId}/amenities",
@@ -19,7 +19,7 @@ def get_listing_amenities_route(listing_id):
     )
 
 
-@listing_amenity_bp.route("/listings/<int:listing_id>/amenities", methods=["POST"])
+@northstar.route("/listings/<int:listing_id>/amenities", methods=["POST"])
 def create_listing_amenities_route(listing_id):
     return handle_request(
         endpoint="/listings/{listingId}/amenities",
@@ -31,7 +31,7 @@ def create_listing_amenities_route(listing_id):
     )
 
 
-@listing_amenity_bp.route("/listings/<int:listing_id>/amenities", methods=["PUT"])
+@northstar.route("/listings/<int:listing_id>/amenities", methods=["PUT"])
 def update_listing_amenities_route(listing_id):
     return handle_request(
         endpoint="/listings/{listingId}/amenities",
@@ -43,7 +43,7 @@ def update_listing_amenities_route(listing_id):
     )
 
 
-@listing_amenity_bp.route("/listings/<int:listing_id>/amenities", methods=["DELETE"])
+@northstar.route("/listings/<int:listing_id>/amenities", methods=["DELETE"])
 def delete_listing_amenities_route(listing_id):
     return handle_request(
         endpoint="/listings/{listingId}/amenities",

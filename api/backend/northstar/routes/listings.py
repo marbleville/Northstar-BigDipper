@@ -1,10 +1,10 @@
-from backend.northstar.blueprint import listing_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import LISTING_CREATE_BODY, LISTINGS_QUERY
 from backend.northstar.endpoints import listings as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@listing_bp.route("/listings", methods=["GET"])
+@northstar.route("/listings", methods=["GET"])
 def get_listings_route():
     return handle_request(
         endpoint="/listings",
@@ -14,7 +14,7 @@ def get_listings_route():
     )
 
 
-@listing_bp.route("/listings", methods=["POST"])
+@northstar.route("/listings", methods=["POST"])
 def create_listings_route():
     return handle_request(
         endpoint="/listings",

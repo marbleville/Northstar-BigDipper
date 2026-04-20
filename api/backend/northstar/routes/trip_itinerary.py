@@ -1,4 +1,4 @@
-from backend.northstar.blueprint import booking_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import (
     TRIP_ID_PATH,
     TRIP_ITINERARY_QUERY,
@@ -8,7 +8,7 @@ from backend.northstar.endpoints import trip_itinerary as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@booking_bp.route("/trips/<int:trip_id>/itinerary", methods=["GET"])
+@northstar.route("/trips/<int:trip_id>/itinerary", methods=["GET"])
 def get_trip_itinerary_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/itinerary",
@@ -20,7 +20,7 @@ def get_trip_itinerary_route(trip_id):
     )
 
 
-@booking_bp.route("/trips/<int:trip_id>/itinerary", methods=["PUT"])
+@northstar.route("/trips/<int:trip_id>/itinerary", methods=["PUT"])
 def update_trip_itinerary_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/itinerary",
