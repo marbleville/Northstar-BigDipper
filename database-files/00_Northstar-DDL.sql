@@ -45,7 +45,7 @@ CREATE TABLE Vendor (
 );
 
 CREATE TABLE Trip (
-    trip_id INT PRIMARY KEY,
+    trip_id INT PRIMARY KEY AUTO_INCREMENT,
     planner_id INT NOT NULL,
     trip_name VARCHAR(100) NOT NULL,
     date_booked DATE,
@@ -93,7 +93,7 @@ CREATE TABLE Promotion (
 );
 
 CREATE TABLE Listing (
-    listing_id INT PRIMARY KEY,
+    listing_id INT PRIMARY KEY AUTO_INCREMENT,
     vendor_id INT NOT NULL,
     price DECIMAL(10,2),
     traveler_rating DECIMAL(3,2),

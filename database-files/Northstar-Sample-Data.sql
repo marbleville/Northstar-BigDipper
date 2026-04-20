@@ -32,8 +32,8 @@ INSERT INTO Promotion VALUES
 
 -- Listing
 INSERT INTO Listing VALUES
-(1, 1, 200.00, 4.5, 'Available', 'Hotel', 'Daily', 'N/A', TRUE, '9-5', 'Nice hotel', 'None'),
-(2, 2, 50.00, 4.2, 'Available', 'Tour', 'Weekly', 'N/A', TRUE, '10-6', 'Food tour', 'Discount included');
+(1, 1, 200.00, 4.5, 'Available', 'Hotel', 'Available', 'N/A', TRUE, '9-5', 'Nice hotel', 'None'),
+(2, 2, 50.00, 4.2, 'Available', 'Tour', 'Available', 'N/A', TRUE, '10-6', 'Food tour', 'Discount included');
 
 -- Booking
 INSERT INTO Booking VALUES
