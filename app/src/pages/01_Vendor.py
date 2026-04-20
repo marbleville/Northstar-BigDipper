@@ -167,8 +167,8 @@ with tab4:
         st.write("Days Available")
         day_cols = st.columns(7)
         days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
-        [day_cols[i].checkbox(days[i], key=f"day_{i}") for i in range(7)]
-
+        for i in range(7):                             
+            day_cols[i].checkbox(days[i], key=f"day_{i}")
         st.divider()
 
         # Amenities and Notes
