@@ -1,4 +1,4 @@
-from backend.northstar.blueprint import northstar
+from backend.northstar.blueprint import notification_bp
 from backend.northstar.contracts import (
     TRIP_ID_PATH,
     TRIP_NOTIFICATIONS_CREATE_BODY,
@@ -10,7 +10,7 @@ from backend.northstar.endpoints import trip_notifications as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@northstar.route("/trips/<int:trip_id>/notifications", methods=["GET"])
+@notification_bp.route("/trips/<int:trip_id>/notifications", methods=["GET"])
 def get_trip_notifications_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/notifications",
@@ -22,7 +22,7 @@ def get_trip_notifications_route(trip_id):
     )
 
 
-@northstar.route("/trips/<int:trip_id>/notifications", methods=["POST"])
+@notification_bp.route("/trips/<int:trip_id>/notifications", methods=["POST"])
 def create_trip_notifications_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/notifications",
@@ -34,7 +34,7 @@ def create_trip_notifications_route(trip_id):
     )
 
 
-@northstar.route("/trips/<int:trip_id>/notifications", methods=["PUT"])
+@notification_bp.route("/trips/<int:trip_id>/notifications", methods=["PUT"])
 def update_trip_notifications_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/notifications",
@@ -46,7 +46,7 @@ def update_trip_notifications_route(trip_id):
     )
 
 
-@northstar.route("/trips/<int:trip_id>/notifications", methods=["DELETE"])
+@notification_bp.route("/trips/<int:trip_id>/notifications", methods=["DELETE"])
 def delete_trip_notifications_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/notifications",

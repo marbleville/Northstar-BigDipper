@@ -1,10 +1,10 @@
-from backend.northstar.blueprint import northstar
+from backend.northstar.blueprint import vendor_bp
 from backend.northstar.contracts import VENDOR_ID_PATH, VENDOR_UPDATE_BODY
 from backend.northstar.endpoints import vendor_detail as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@northstar.route("/vendors/<int:vendor_id>", methods=["GET"])
+@vendor_bp.route("/vendors/<int:vendor_id>", methods=["GET"])
 def get_vendor_detail_route(vendor_id):
     return handle_request(
         endpoint="/vendors/{vendorId}",
@@ -15,7 +15,7 @@ def get_vendor_detail_route(vendor_id):
     )
 
 
-@northstar.route("/vendors/<int:vendor_id>", methods=["PUT"])
+@vendor_bp.route("/vendors/<int:vendor_id>", methods=["PUT"])
 def update_vendor_detail_route(vendor_id):
     return handle_request(
         endpoint="/vendors/{vendorId}",
@@ -27,7 +27,7 @@ def update_vendor_detail_route(vendor_id):
     )
 
 
-@northstar.route("/vendors/<int:vendor_id>", methods=["DELETE"])
+@vendor_bp.route("/vendors/<int:vendor_id>", methods=["DELETE"])
 def delete_vendor_detail_route(vendor_id):
     return handle_request(
         endpoint="/vendors/{vendorId}",
