@@ -4,7 +4,7 @@ import os
 import logging
 
 from backend.db_connection import init_app as init_db
-from backend.northstar import northstar_blueprints
+from backend.northstar import northstar
 
 
 def create_app():
@@ -32,9 +32,9 @@ def create_app():
     app.logger.info("create_app(): initializing database connection")
     init_db(app)
 
-    # Register each table-oriented Blueprint without changing public URLs.
+    # Register the routes from each Blueprint with the app object
+    # and give a url prefix to each.
     app.logger.info("create_app(): registering blueprints")
-    for blueprint in northstar_blueprints:
-        app.register_blueprint(blueprint)
+    app.register_blueprint(northstar)
 
     return app

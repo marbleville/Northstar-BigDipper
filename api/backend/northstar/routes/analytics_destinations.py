@@ -1,9 +1,9 @@
-from backend.northstar.blueprint import trip_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.endpoints import analytics_destinations as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@trip_bp.route("/analytics/destinations", methods=["GET"])
+@northstar.route("/analytics/destinations", methods=["GET"])
 def get_analytics_destinations_route():
     return handle_request(
         endpoint="/analytics/destinations",

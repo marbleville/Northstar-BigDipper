@@ -1,4 +1,4 @@
-from backend.northstar.blueprint import promotion_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import (
     PROMOTION_BULK_DELETE_BODY,
     PROMOTION_BULK_UPDATE_BODY,
@@ -9,7 +9,7 @@ from backend.northstar.endpoints import vendor_promotions as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@promotion_bp.route("/vendors/<int:vendor_id>/promotions", methods=["GET"])
+@northstar.route("/vendors/<int:vendor_id>/promotions", methods=["GET"])
 def get_vendor_promotions_route(vendor_id):
     return handle_request(
         endpoint="/vendors/{vendorId}/promotions",
@@ -20,7 +20,7 @@ def get_vendor_promotions_route(vendor_id):
     )
 
 
-@promotion_bp.route("/vendors/<int:vendor_id>/promotions", methods=["POST"])
+@northstar.route("/vendors/<int:vendor_id>/promotions", methods=["POST"])
 def create_vendor_promotions_route(vendor_id):
     return handle_request(
         endpoint="/vendors/{vendorId}/promotions",
@@ -32,7 +32,7 @@ def create_vendor_promotions_route(vendor_id):
     )
 
 
-@promotion_bp.route("/vendors/<int:vendor_id>/promotions", methods=["PUT"])
+@northstar.route("/vendors/<int:vendor_id>/promotions", methods=["PUT"])
 def update_vendor_promotions_route(vendor_id):
     return handle_request(
         endpoint="/vendors/{vendorId}/promotions",
@@ -44,7 +44,7 @@ def update_vendor_promotions_route(vendor_id):
     )
 
 
-@promotion_bp.route("/vendors/<int:vendor_id>/promotions", methods=["DELETE"])
+@northstar.route("/vendors/<int:vendor_id>/promotions", methods=["DELETE"])
 def delete_vendor_promotions_route(vendor_id):
     return handle_request(
         endpoint="/vendors/{vendorId}/promotions",

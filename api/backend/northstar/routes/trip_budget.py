@@ -1,4 +1,4 @@
-from backend.northstar.blueprint import trip_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import (
     TRIP_BUDGET_QUERY,
     TRIP_BUDGET_UPDATE_BODY,
@@ -8,7 +8,7 @@ from backend.northstar.endpoints import trip_budget as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@trip_bp.route("/trips/<int:trip_id>/budget", methods=["GET"])
+@northstar.route("/trips/<int:trip_id>/budget", methods=["GET"])
 def get_trip_budget_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/budget",
@@ -20,7 +20,7 @@ def get_trip_budget_route(trip_id):
     )
 
 
-@trip_bp.route("/trips/<int:trip_id>/budget", methods=["PUT"])
+@northstar.route("/trips/<int:trip_id>/budget", methods=["PUT"])
 def update_trip_budget_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/budget",
