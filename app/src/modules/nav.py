@@ -76,6 +76,9 @@ def ml_model_mgmt_nav():
         "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
     )
 
+# ---- Role: Burton Guster ----------------------------------------------------
+def vendor_home_nav():
+    st.sidebar.page_link("pages/01_Vendor.py", label="Act as Gus, a Vendor", icon="🥸")
 
 # ---- Sidebar assembly -------------------------------------------------------
 
@@ -114,6 +117,9 @@ def SideBarLinks(show_home=False):
         if st.session_state["role"] == "administrator":
             admin_home_nav()
             ml_model_mgmt_nav()
+
+        if st.session_state["role"] == "burton_guster":  # 👈 add this
+            vendor_home_nav()
 
     # About link appears at the bottom for all roles
     about_page_nav()
