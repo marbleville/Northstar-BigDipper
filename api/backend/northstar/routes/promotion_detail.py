@@ -1,10 +1,10 @@
-from backend.northstar.blueprint import northstar
+from backend.northstar.blueprint import promotion_bp
 from backend.northstar.contracts import PROMOTION_ID_PATH, PROMOTION_UPDATE_BODY
 from backend.northstar.endpoints import promotion_detail as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@northstar.route("/promotions/<int:promotion_id>", methods=["GET"])
+@promotion_bp.route("/promotions/<int:promotion_id>", methods=["GET"])
 def get_promotion_detail_route(promotion_id):
     return handle_request(
         endpoint="/promotions/{promotionId}",
@@ -15,7 +15,7 @@ def get_promotion_detail_route(promotion_id):
     )
 
 
-@northstar.route("/promotions/<int:promotion_id>", methods=["PUT"])
+@promotion_bp.route("/promotions/<int:promotion_id>", methods=["PUT"])
 def update_promotion_detail_route(promotion_id):
     return handle_request(
         endpoint="/promotions/{promotionId}",
@@ -27,7 +27,7 @@ def update_promotion_detail_route(promotion_id):
     )
 
 
-@northstar.route("/promotions/<int:promotion_id>", methods=["DELETE"])
+@promotion_bp.route("/promotions/<int:promotion_id>", methods=["DELETE"])
 def delete_promotion_detail_route(promotion_id):
     return handle_request(
         endpoint="/promotions/{promotionId}",
