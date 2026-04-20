@@ -6,9 +6,6 @@ from modules.nav import SideBarLinks
 import pandas as pd
 
 st.set_page_config(page_title="Vendor Hub", layout="wide")
-
-
-# Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
 
 st.markdown("""
@@ -62,10 +59,11 @@ col4.metric("Promotions",      sum(1 for p in st.session_state.promotions if p["
 
 st.divider()
 
-left, right = st.columns([1.2, 1])
+# ---- Tabs -------------------------------------------------------------------
+tab1, tab2, tab3, tab4 = st.tabs(["📋 My Listings", "📊 Bookings & Engagement", "🎁 Promotions", "➕ Add Listing"])
 
-# ---- Left: Listings ---------------------------------------------------------
-with left:
+# ---- Tab 1: My Listings -----------------------------------------------------
+with tab1:
     st.subheader("All Listings")
     for i, listing in enumerate(st.session_state.listings):
         with st.expander(f"{listing['name']}  —  {listing['status']}"):
@@ -90,31 +88,23 @@ with left:
                     st.session_state.listings[i]["status"] = "Inactive"
                     st.warning(f"'{listing['name']}' marked inactive.")
 
-    st.subheader("Add New Listing")
-    with st.form("new_listing_form"):
-        n_name  = st.text_input("Listing Name")
-        n_price = st.number_input("Price ($)", min_value=0)
-        n_avail = st.text_input("Availability")
-        st.selectbox("Service Type", ["Venue", "Catering", "Transport", "Activity", "Other"])
-        st.text_area("Description / Promotional Notes")
-        if st.form_submit_button("Add Listing", use_container_width=True) and n_name:
-            st.session_state.listings.append(
-                {"name": n_name, "price": n_price, "availability": n_avail, "status": "Active"})
-            st.success(f"'{n_name}' added!")
+# ---- Tab 2: Bookings & Engagement -------------------------------------------
+with tab2:
+    left, right = st.columns(2)
 
-# ---- Right: Bookings, Engagement, Promotions --------------------------------
-with right:
-    st.subheader("Recent Booking Requests")
-    icons = {"Pending": "🟡", "Confirmed": "🟢", "Declined": "🔴"}
-    for b in st.session_state.bookings:
-        st.markdown(f"{icons.get(b['status'], '⚪')} **{b['group']}** — {b['status']}")
+    with left:
+        st.subheader("Recent Booking Requests")
+        icons = {"Pending": "🟡", "Confirmed": "🟢", "Declined": "🔴"}
+        for b in st.session_state.bookings:
+            st.markdown(f"{icons.get(b['status'], '⚪')} **{b['group']}** — {b['status']}")
 
-    st.divider()
-    st.subheader("Engagement Trends")
-    eng_df = pd.DataFrame({"Day": list(engagement.keys()), "Views": list(engagement.values())})
-    st.bar_chart(eng_df.set_index("Day"))
+    with right:
+        st.subheader("Engagement Trends")
+        eng_df = pd.DataFrame({"Day": list(engagement.keys()), "Views": list(engagement.values())})
+        st.bar_chart(eng_df.set_index("Day"))
 
-    st.divider()
+# ---- Tab 3: Promotions ------------------------------------------------------
+with tab3:
     st.subheader("Active Promotions")
     for j, promo in enumerate(st.session_state.promotions):
         pc1, pc2 = st.columns([3, 1])
@@ -133,3 +123,77 @@ with right:
         if st.form_submit_button("Create Promotion", use_container_width=True) and p_name:
             st.session_state.promotions.append({"name": p_name, "active": True})
             st.success(f"Promotion '{p_name}' created!")
+
+# ---- Tab 4: Add Listing -----------------------------------------------------
+with tab4:
+    st.subheader("Add New Listing")
+    st.caption("Listings > Add New Listing")
+
+    with st.form("add_listing_form"):
+
+        # Service Details
+        st.subheader("Service Details")
+        listing_name = st.text_input("Listing Name", placeholder="e.g. XX Boutique Hotel")
+        service_type = st.selectbox("Service Type", ["Select Type", "Venue", "Catering", "Transport", "Activity", "Other"])
+        description  = st.text_area("Description", placeholder="Describe your service for planners and travelers...")
+
+        st.divider()
+
+        # Pricing
+        st.subheader("Pricing")
+        p1, p2 = st.columns(2)
+        with p1:
+            base_price = st.number_input("Base Price ($)", min_value=0.0, format="%.2f")
+        with p2:
+            price_per  = st.selectbox("Price Per", ["per night", "per person", "per event", "flat rate"])
+        group_pricing = st.radio("Group Pricing Available?", ["Yes", "No"], horizontal=True)
+
+        st.divider()
+
+        # Availability
+        st.subheader("Availability")
+        a1, a2 = st.columns(2)
+        with a1:
+            avail_from = st.date_input("Available From")
+        with a2:
+            avail_to   = st.date_input("Available To")
+
+        h1, h2 = st.columns(2)
+        with h1:
+            opens  = st.text_input("Operating Hours — Opens",  placeholder="Opens 9AM")
+        with h2:
+            closes = st.text_input("Operating Hours — Closes", placeholder="Closes 5PM")
+
+        st.write("Days Available")
+        day_cols = st.columns(7)
+        days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
+        [day_cols[i].checkbox(days[i], key=f"day_{i}") for i in range(7)]
+
+        st.divider()
+
+        # Amenities and Notes
+        st.subheader("Amenities and Notes")
+        st.write("Amenities (select all that apply)")
+        am1, am2, am3, am4 = st.columns(4)
+        am1.checkbox("WiFi",      key="wifi")
+        am2.checkbox("Parking",   key="parking")
+        am3.checkbox("Breakfast", key="breakfast")
+        custom_amenity = am4.text_input("+ Add more", placeholder="e.g. Pool")
+
+        promo_notes = st.text_input("Promotional Discounts",
+                                    placeholder="e.g. Spring Break Discount, Large Group Deal...")
+
+        st.divider()
+
+        submitted = st.form_submit_button("Submit Listing", use_container_width=True)
+        if submitted:
+            if not listing_name or service_type == "Select Type":
+                st.error("Please fill in at least a listing name and service type.")
+            else:
+                st.session_state.listings.append({
+                    "name":         listing_name,
+                    "status":       "Active",
+                    "price":        base_price,
+                    "availability": f"{avail_from} – {avail_to}",
+                })
+                st.success(f"'{listing_name}' has been submitted and is now active!")
