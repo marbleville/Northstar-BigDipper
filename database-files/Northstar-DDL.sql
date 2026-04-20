@@ -130,7 +130,7 @@ CREATE TABLE Booking (
         ON DELETE SET NULL,
     FOREIGN KEY (trip_id) REFERENCES Trip(trip_id)
         ON UPDATE CASCADE
-        ON DELETE SET NULL
+        ON DELETE RESTRICT
 );
 
 CREATE TABLE Funding_Request (
@@ -182,7 +182,7 @@ CREATE TABLE Traveler_Preference (
         ON DELETE CASCADE,
     FOREIGN KEY (trip_id) REFERENCES Trip(trip_id)
         ON UPDATE CASCADE
-        ON DELETE SET NULL
+        ON DELETE RESTRICT
 );
 
 CREATE TABLE Listing_Amenity (
@@ -197,8 +197,9 @@ CREATE TABLE Listing_Amenity (
 CREATE TABLE Traveler_Vote (
     traveler_id INT NOT NULL,
     listing_id INT NOT NULL,
-    vote_value INT NOT NULL,
+    vote_value BOOLEAN NOT NULL,
     trip_id INT NOT NULL,
+    saved BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY (traveler_id, listing_id),
     FOREIGN KEY (traveler_id) REFERENCES Traveler(traveler_id)
         ON UPDATE CASCADE
@@ -208,5 +209,5 @@ CREATE TABLE Traveler_Vote (
         ON DELETE CASCADE,
     FOREIGN KEY (trip_id) REFERENCES Trip(trip_id)
         ON UPDATE CASCADE
-        ON DELETE SET NULL
+        ON DELETE RESTRICT
 );

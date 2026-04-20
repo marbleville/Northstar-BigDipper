@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from flask import request
+from flask import request, jsonify
 
+from backend.db_connection import get_db
 from backend.northstar.responses import not_implemented, validation_error
 from backend.northstar.validation import (
     EMPTY_SCHEMA,
@@ -13,6 +14,40 @@ from backend.northstar.validation import (
 
 
 NO_BODY = object()
+
+
+def execute_query(query_payload):
+    """Execute a query payload against the database"""
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+
+    try:
+        if "queries" in query_payload:
+            # Multi-query execution
+            results = []
+            for query in query_payload["queries"]:
+                cursor.execute(query["sql"], query.get("params", []))
+                if query["sql"].strip().upper().startswith("SELECT"):
+                    results.extend(cursor.fetchall())
+                else:
+                    db.commit()
+            return {"data": results}
+        elif "sql" in query_payload:
+            # Single query execution
+            cursor.execute(query_payload["sql"], query_payload.get("params", []))
+            if query_payload["sql"].strip().upper().startswith("SELECT"):
+                results = cursor.fetchall()
+                return {"data": results}
+            else:
+                db.commit()
+                return {"data": []}
+        else:
+            return {"error": "Invalid query payload"}
+    except Exception as e:
+        db.rollback()
+        return {"error": str(e)}
+    finally:
+        cursor.close()
 
 
 def handle_request(
@@ -43,6 +78,11 @@ def handle_request(
             validated["body"] = validate_json_body(request, body_schema)
 
         query_payload = handler(validated)
-        return not_implemented(endpoint, method, validated, query_payload)
+        result = execute_query(query_payload)
+
+        if "error" in result:
+            return jsonify({"error": result["error"]}), 500
+        else:
+            return jsonify(result["data"]), 200
     except ValidationError as exc:
         return validation_error(exc.errors)

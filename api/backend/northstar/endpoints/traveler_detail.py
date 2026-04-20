@@ -52,3 +52,26 @@ def delete_traveler_detail(validated):
         where_clause="traveler_id = %s",
         where_params=[traveler_id],
     )
+
+
+def get_traveler_trips(validated):
+    traveler_id = validated["path"]["traveler_id"]
+    sql = """
+        SELECT
+            t.trip_id,
+            t.trip_name,
+            t.destination,
+            t.city,
+            t.country,
+            t.start_date,
+            t.end_date,
+            t.trip_status,
+            t.group_size,
+            tt.start_date as traveler_start_date,
+            tt.end_date as traveler_end_date
+        FROM Trip t
+        JOIN Trip_Traveler tt ON t.trip_id = tt.trip_id
+        WHERE tt.traveler_id = %s
+        ORDER BY t.start_date DESC
+    """
+    return select_payload(sql, params=[traveler_id])

@@ -504,3 +504,13 @@ TRAVELER_NOTIFICATIONS_DELETE_BODY = schema(
     required={"notification_ids": list_field(POSITIVE_INT)}
 )
 NOTIFICATION_UPDATE_BODY = schema(required={"read_status": BOOLEAN})
+
+TRIP_TRAVELER_LISTING_PATH = schema(
+    required={
+        "trip_id": POSITIVE_INT,
+        "traveler_id": POSITIVE_INT,
+        "listing_id": POSITIVE_INT,
+    }
+)
+
+EMPTY_BODY = schema(optional={})

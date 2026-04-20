@@ -77,6 +77,14 @@ def ml_model_mgmt_nav():
     )
 
 
+# ---- Role: traveler ---------------------------------------------------------
+
+def traveler_home_nav():
+    st.sidebar.page_link(
+        "pages/17_Traveler_Home.py", label="Traveler Dashboard", icon="✈️"
+    )
+
+
 # ---- Sidebar assembly -------------------------------------------------------
 
 def SideBarLinks(show_home=False):
@@ -114,6 +122,9 @@ def SideBarLinks(show_home=False):
         if st.session_state["role"] == "administrator":
             admin_home_nav()
             ml_model_mgmt_nav()
+
+        if st.session_state["role"] == "traveler":
+            traveler_home_nav()
 
     # About link appears at the bottom for all roles
     about_page_nav()
