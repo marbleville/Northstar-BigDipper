@@ -1,4 +1,4 @@
-from backend.northstar.blueprint import northstar
+from backend.northstar.blueprint import traveler_vote_bp
 from backend.northstar.contracts import (
     TRIP_TRAVELER_PATH,
     TRIP_TRAVELER_VOTE_BODY,
@@ -8,7 +8,7 @@ from backend.northstar.endpoints import trip_traveler_votes as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@northstar.route("/trips/<int:trip_id>/travelers/<int:traveler_id>/votes", methods=["GET"])
+@traveler_vote_bp.route("/trips/<int:trip_id>/travelers/<int:traveler_id>/votes", methods=["GET"])
 def get_trip_traveler_votes_route(trip_id, traveler_id):
     return handle_request(
         endpoint="/trips/{tripId}/travelers/{travelerId}/votes",
@@ -19,7 +19,7 @@ def get_trip_traveler_votes_route(trip_id, traveler_id):
     )
 
 
-@northstar.route("/trips/<int:trip_id>/travelers/<int:traveler_id>/votes", methods=["POST"])
+@traveler_vote_bp.route("/trips/<int:trip_id>/travelers/<int:traveler_id>/votes", methods=["POST"])
 def create_trip_traveler_votes_route(trip_id, traveler_id):
     return handle_request(
         endpoint="/trips/{tripId}/travelers/{travelerId}/votes",
@@ -31,7 +31,7 @@ def create_trip_traveler_votes_route(trip_id, traveler_id):
     )
 
 
-@northstar.route("/trips/<int:trip_id>/travelers/<int:traveler_id>/votes", methods=["PUT"])
+@traveler_vote_bp.route("/trips/<int:trip_id>/travelers/<int:traveler_id>/votes", methods=["PUT"])
 def update_trip_traveler_votes_route(trip_id, traveler_id):
     return handle_request(
         endpoint="/trips/{tripId}/travelers/{travelerId}/votes",
@@ -43,7 +43,7 @@ def update_trip_traveler_votes_route(trip_id, traveler_id):
     )
 
 
-@northstar.route(
+@traveler_vote_bp.route(
     "/trips/<int:trip_id>/travelers/<int:traveler_id>/votes",
     methods=["DELETE"],
 )

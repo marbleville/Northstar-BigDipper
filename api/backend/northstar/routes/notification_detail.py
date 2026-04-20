@@ -1,10 +1,10 @@
-from backend.northstar.blueprint import northstar
+from backend.northstar.blueprint import notification_bp
 from backend.northstar.contracts import NOTIFICATION_ID_PATH, NOTIFICATION_UPDATE_BODY
 from backend.northstar.endpoints import notification_detail as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@northstar.route("/notifications/<int:notification_id>", methods=["GET"])
+@notification_bp.route("/notifications/<int:notification_id>", methods=["GET"])
 def get_notification_detail_route(notification_id):
     return handle_request(
         endpoint="/notifications/{notificationId}",
@@ -15,7 +15,7 @@ def get_notification_detail_route(notification_id):
     )
 
 
-@northstar.route("/notifications/<int:notification_id>", methods=["PUT"])
+@notification_bp.route("/notifications/<int:notification_id>", methods=["PUT"])
 def update_notification_detail_route(notification_id):
     return handle_request(
         endpoint="/notifications/{notificationId}",
@@ -27,7 +27,7 @@ def update_notification_detail_route(notification_id):
     )
 
 
-@northstar.route("/notifications/<int:notification_id>", methods=["DELETE"])
+@notification_bp.route("/notifications/<int:notification_id>", methods=["DELETE"])
 def delete_notification_detail_route(notification_id):
     return handle_request(
         endpoint="/notifications/{notificationId}",
