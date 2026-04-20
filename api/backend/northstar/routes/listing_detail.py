@@ -1,10 +1,10 @@
-from backend.northstar.blueprint import listing_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import LISTING_ID_PATH, LISTING_UPDATE_BODY
 from backend.northstar.endpoints import listing_detail as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@listing_bp.route("/listings/<int:listing_id>", methods=["GET"])
+@northstar.route("/listings/<int:listing_id>", methods=["GET"])
 def get_listing_detail_route(listing_id):
     return handle_request(
         endpoint="/listings/{listingId}",
@@ -15,7 +15,7 @@ def get_listing_detail_route(listing_id):
     )
 
 
-@listing_bp.route("/listings/<int:listing_id>", methods=["PUT"])
+@northstar.route("/listings/<int:listing_id>", methods=["PUT"])
 def update_listing_detail_route(listing_id):
     return handle_request(
         endpoint="/listings/{listingId}",
@@ -27,7 +27,7 @@ def update_listing_detail_route(listing_id):
     )
 
 
-@listing_bp.route("/listings/<int:listing_id>", methods=["DELETE"])
+@northstar.route("/listings/<int:listing_id>", methods=["DELETE"])
 def delete_listing_detail_route(listing_id):
     return handle_request(
         endpoint="/listings/{listingId}",

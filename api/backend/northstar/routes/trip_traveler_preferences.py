@@ -1,4 +1,4 @@
-from backend.northstar.blueprint import traveler_preference_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import (
     TRIP_TRAVELER_PATH,
     TRIP_TRAVELER_PREFERENCES_BODY,
@@ -7,7 +7,7 @@ from backend.northstar.endpoints import trip_traveler_preferences as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@traveler_preference_bp.route(
+@northstar.route(
     "/trips/<int:trip_id>/travelers/<int:traveler_id>/preferences",
     methods=["GET"],
 )
@@ -21,7 +21,7 @@ def get_trip_traveler_preferences_route(trip_id, traveler_id):
     )
 
 
-@traveler_preference_bp.route(
+@northstar.route(
     "/trips/<int:trip_id>/travelers/<int:traveler_id>/preferences",
     methods=["POST"],
 )
@@ -36,7 +36,7 @@ def create_trip_traveler_preferences_route(trip_id, traveler_id):
     )
 
 
-@traveler_preference_bp.route(
+@northstar.route(
     "/trips/<int:trip_id>/travelers/<int:traveler_id>/preferences",
     methods=["PUT"],
 )
@@ -51,7 +51,7 @@ def update_trip_traveler_preferences_route(trip_id, traveler_id):
     )
 
 
-@traveler_preference_bp.route(
+@northstar.route(
     "/trips/<int:trip_id>/travelers/<int:traveler_id>/preferences",
     methods=["DELETE"],
 )

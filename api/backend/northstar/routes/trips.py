@@ -1,10 +1,10 @@
-from backend.northstar.blueprint import trip_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import TRIP_CREATE_BODY, TRIPS_QUERY
 from backend.northstar.endpoints import trips as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@trip_bp.route("/trips", methods=["GET"])
+@northstar.route("/trips", methods=["GET"])
 def get_trips_route():
     return handle_request(
         endpoint="/trips",
@@ -14,7 +14,7 @@ def get_trips_route():
     )
 
 
-@trip_bp.route("/trips", methods=["POST"])
+@northstar.route("/trips", methods=["POST"])
 def create_trip_route():
     return handle_request(
         endpoint="/trips",

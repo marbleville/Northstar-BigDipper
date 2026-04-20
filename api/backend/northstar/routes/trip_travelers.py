@@ -1,4 +1,4 @@
-from backend.northstar.blueprint import trip_traveler_bp
+from backend.northstar.blueprint import northstar
 from backend.northstar.contracts import (
     TRIP_ID_PATH,
     TRIP_TRAVELERS_CREATE_BODY,
@@ -9,7 +9,7 @@ from backend.northstar.endpoints import trip_travelers as endpoint
 from backend.northstar.route_utils import handle_request
 
 
-@trip_traveler_bp.route("/trips/<int:trip_id>/travelers", methods=["GET"])
+@northstar.route("/trips/<int:trip_id>/travelers", methods=["GET"])
 def get_trip_travelers_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/travelers",
@@ -20,7 +20,7 @@ def get_trip_travelers_route(trip_id):
     )
 
 
-@trip_traveler_bp.route("/trips/<int:trip_id>/travelers", methods=["POST"])
+@northstar.route("/trips/<int:trip_id>/travelers", methods=["POST"])
 def create_trip_travelers_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/travelers",
@@ -32,7 +32,7 @@ def create_trip_travelers_route(trip_id):
     )
 
 
-@trip_traveler_bp.route("/trips/<int:trip_id>/travelers", methods=["PUT"])
+@northstar.route("/trips/<int:trip_id>/travelers", methods=["PUT"])
 def update_trip_travelers_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/travelers",
@@ -44,7 +44,7 @@ def update_trip_travelers_route(trip_id):
     )
 
 
-@trip_traveler_bp.route("/trips/<int:trip_id>/travelers", methods=["DELETE"])
+@northstar.route("/trips/<int:trip_id>/travelers", methods=["DELETE"])
 def delete_trip_travelers_route(trip_id):
     return handle_request(
         endpoint="/trips/{tripId}/travelers",
