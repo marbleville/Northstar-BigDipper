@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Booking VALUES
 (1, 1, 1, 1, 1, '2025-06-18', 'Confirmed', TRUE),
 (2, 2, 2, 2, 2, '2025-07-08', 'Pending', TRUE),

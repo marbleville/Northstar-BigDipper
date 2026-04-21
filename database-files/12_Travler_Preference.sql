@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Traveler_Preference VALUES
 (1, 'Window seat', 1),
 (2, 'Direct flights', 1),

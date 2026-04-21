@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Vendor VALUES
 (1, 'BrightPath Travel', '2025-10-14', TRUE),
 (2, 'SkyBridge Airlines', '2025-06-22', FALSE),

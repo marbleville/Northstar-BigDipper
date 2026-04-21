@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Trip VALUES
 (1, 1, 'Northern Lights Expedition', '2025-06-12', 'Booked', 'Iceland Adventure', 'Reykjavik', 'Iceland', 'Nordic', 'Adventure', '2025-11-01', '2025-11-07', TRUE, 3200.50, 8),
 (2, 2, 'Mediterranean Escape', '2025-07-03', 'Planned', 'Coastal Europe', 'Nice', 'France', 'Europe', 'Leisure', '2025-09-10', '2025-09-18', TRUE, 2750.00, 5),

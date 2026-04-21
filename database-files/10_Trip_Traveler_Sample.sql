@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Trip_Traveler VALUES
 (1, 1, '2025-11-01', '2025-11-07'),
 (1, 2, '2025-11-01', '2025-11-07'),

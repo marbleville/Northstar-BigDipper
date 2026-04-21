@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Promotion VALUES
 (1, 1, 'Winter Escape Deal', 'percentage', 15.00, '2025-11-01', '2025-12-15', 'Discount on winter travel packages', TRUE),
 (2, 2, 'Flight Saver', 'percentage', 10.00, '2025-06-01', '2025-06-30', 'Save on international flights', FALSE),
