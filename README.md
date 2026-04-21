@@ -1,135 +1,210 @@
-# Spring 2026 CS 3200 Project Template
+# Big Dipper
 
-This is a template repo for Dr. Fontenot's Spring 2026 CS 3200 Course Project.
+Big Dipper is a data-driven travel agency management platform built by the
+NorthStar Travelers team for CS 3200 at Northeastern University.
 
-It includes most of the infrastructure setup (containers), sample databases, and example UI pages. Explore it fully and ask questions!
+The application connects travelers, planners, agency managers, and vendors in
+one system. Trip planning is often spread across emails, spreadsheets, and
+third-party booking tools; Big Dipper centralizes traveler preferences, vendor
+inventory, trip planning, booking workflows, notifications, and operational
+analytics so travel agencies can plan and manage trips more effectively.
+
+## User Roles
+
+- **Planner**: Builds itineraries, compares lodging and activity options, tracks
+  trip budgets, and coordinates group trips with different traveler preferences.
+- **Traveler**: Views trip details, submits food and lodging preferences, votes
+  on proposed activities, saves listings, and receives trip notifications.
+- **Vendor**: Manages listings and promotions, keeps offerings accurate, and
+  monitors booking demand and engagement.
+- **Manager**: Reviews booking trends, spending patterns, vendor performance,
+  destination demand, and data quality across the platform.
+
+## Tech Stack
+
+- **Frontend**: Streamlit
+- **Backend**: Flask REST API
+- **Database**: MySQL 9
+- **Infrastructure**: Docker Compose
+- **Local development language**: Python 3.11
+
+## Repository Structure
+
+- `app/`: Streamlit frontend application.
+- `app/src/pages/`: Role-specific Streamlit pages for travelers, planners,
+  vendors, managers, admins, and the About page.
+- `api/`: Flask REST API and backend application code.
+- `api/backend/northstar/`: Big Dipper API routes, endpoint logic, validation,
+  and response helpers.
+- `database-files/`: SQL files used to create and seed the `Northstar` MySQL
+  database. These run in alphabetical order when the database container is first
+  created.
+- `datasets/`: Project datasets, if needed.
+- `ml-src/`: Notebooks or scripts for model development, if needed.
+- `docker-compose.yaml`: Team development Docker Compose stack.
+- `sandbox.yaml`: Optional personal sandbox Docker Compose stack with alternate
+  host ports.
 
 ## Prerequisites
 
-- A GitHub Account
-- A terminal-based git client or GUI Git client such as GitHub Desktop or the Git plugin for VSCode.
-- A distribution of Python running on your laptop. The distribution supported by the course is [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install).
-  - Create a new Python 3.11 environment in `conda` named `db-proj` by running:  
-     ```bash
-     conda create -n db-proj python=3.11
-     ```
-  - Install the Python dependencies listed in `api/requirements.txt` and `app/src/requirements.txt` into your local Python environment. You can do this by running `pip install -r requirements.txt` in each respective directory.
-     ```bash
-     cd api
-     pip install -r requirements.txt
-     cd ../app/src
-     pip install -r requirements.txt
-     ```
-     Note that the `..` means go to the parent folder of the folder you're currently in (which is `api/` after the first command).
-     > **Why install locally if everything runs in Docker?** Installing the packages locally lets your IDE (VSCode) provide autocompletion, linting, and error highlighting as you write code. The app itself always runs inside the Docker containers — the local install is just for editor support.
-- VSCode with the Python Plugin installed
-  - You may use some other Python/code editor.  However, Course staff will only support VS Code. 
+- Git and access to this repository.
+- Docker Desktop or Docker Engine with Docker Compose.
+- A Python distribution. The course-supported options are
+  [Anaconda](https://www.anaconda.com/download) or
+  [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install).
+- VS Code with the Python extension, or another Python editor.
 
+## Initial Setup
 
-## Structure of the Repo
+### 1. Create the local Python environment
 
-- This repository is organized into five main directories:
-  - `./app` - the Streamlit app
-  - `./api` - the Flask REST API
-  - `./database-files` - SQL scripts to initialize the MySQL database
-  - `./datasets` - folder for storing datasets
-  - `./ml-src` - folder for ML model development (Jupyter notebooks, training scripts)
+Create a Python 3.11 Conda environment named `db-proj`:
 
-- The repo also contains a `docker-compose.yaml` file that is used to set up the Docker containers for the front end app, the REST API, and MySQL database. 
+```bash
+conda create -n db-proj python=3.11
+conda activate db-proj
+```
 
-## Suggestion for Learning the Project Code Base
+Install the backend and frontend Python dependencies into that environment:
 
-If you are not familiar with web app development, this code base might be confusing. But don't worry, we'll get through it together. Here are some suggestions for learning the code base:
+```bash
+cd api
+pip install -r requirements.txt
+cd ../app/src
+pip install -r requirements.txt
+cd ../..
+```
 
-1. Start by exploring the `./app` directory. This is where the Streamlit app is located. The Streamlit app is a Python-based web app that is used to interact with the user. It's a great way to build a simple web app without having to learn a lot of web development.
-1. Next, explore the `./api` directory. This is where the Flask REST API is located. The REST API is used to interact with the database and perform other server-side tasks. You might also consider this the "application logic" or "business logic" layer of your app. 
-1. Finally, explore the `./database-files` directory. This is where the SQL scripts are located that will be used to initialize the MySQL database.
-1. Bonus: If you want to have a totally separate copy of the Template Repo on your laptop that you can use to explore and try things without messing up your team repo, see *Setting Up a Personal Testing Repo (Optional)* section below. 
+The application runs in Docker, but installing dependencies locally lets your
+editor provide autocomplete, linting, import resolution, and error highlighting.
 
-## Setting Up the Repos
-<details>
-<summary>Setting Up a Personal Sandbox Repo (Optional)</summary>
+### 2. Create the API environment file
 
-### Setting Up a Personal Sandbox Repo (Optional)
+Create `api/.env` from the template:
 
-**Before you start**: You need to have a GitHub account and a terminal-based git client or GUI Git client such as GitHub Desktop or the Git plugin for VSCode.
+```bash
+cp api/.env.template api/.env
+```
 
-1. Clone this repo to your local machine.
-   1. You can do this by clicking the green "Code" button on the top right of the repo page and copying the URL. Then, in your terminal, run `git clone <URL>`.
-   1. Or, you can use the GitHub Desktop app to clone the repo. See [this page](https://docs.github.com/en/desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop) of the GitHub Desktop Docs for more info. 
-1. Open the repository folder in VSCode.
-1. Set up the `.env` file in the `api` folder based on the `.env.template` file.
-   1. Make a copy of the `.env.template` file and name it `.env`. 
-   1. Open the new `.env` file. 
-   1. On the last line, delete the `<...>` placeholder text, and put a password. Don't reuse any passwords you use for any other services (email, etc.) 
-1. For running the testing containers (for your personal repo), you will tell `docker compose` to use a different configuration file than the typical one.  The one you will use for testing is `sandbox.yaml`.
-   1. `docker compose -f sandbox.yaml up -d` to start all the containers in the background
-   1. `docker compose -f sandbox.yaml down` to shutdown and delete the containers
-   1. `docker compose -f sandbox.yaml up db -d` only start the database container (replace db with api or app for the other two services as needed)
-   1. `docker compose -f sandbox.yaml stop` to "turn off" the containers but not delete them.
-</details>
+Then edit `api/.env` and replace the placeholder values:
 
-### Setting Up Your Team's Repo
+```env
+SECRET_KEY=<change-this-to-a-random-secret>
+DB_USER=root
+DB_HOST=db
+DB_PORT=3306
+DB_NAME=Northstar
+MYSQL_ROOT_PASSWORD=<change-this-to-a-strong-password>
+```
 
-**Before you start**: As a team, one person needs to assume the role of _Team Project Repo Owner_.
+Do not reuse a password from another service.
 
-1. The Team Project Repo Owner needs to **fork** this template repo into their own GitHub account **and give the repo a name consistent with your project's name**. If you're worried that the repo is public, don't. Every team is doing a different project.
-1. In the newly forked team repo, the Team Project Repo Owner should go to the **Settings** tab, choose **Collaborators and Teams** on the left-side panel. Add each of your team members to the repository with Write access.
+## Running the Project
 
-**Remaining Team Members**
+Use the team Docker Compose stack for normal development:
 
-1. Each of the other team members will receive an invitation to join.
-1. Once you have accepted the invitation, you should clone the Team's Project Repo to your local machine.
-1. Set up the `.env` file in the `api` folder based on the `.env.template` file.
-1. For running the testing containers (for your team's repo):
-   1. `docker compose up -d` to start all the containers in the background
-   1. `docker compose down` to shutdown and delete the containers
-   1. `docker compose up db -d` only start the database container (replace db with api or app for the other two services as needed)
-   1. `docker compose stop` to "turn off" the containers but not delete them.
+```bash
+docker compose up -d
+```
 
-**Note:** You can also use the Docker Desktop GUI to start and stop the containers after the first initial run.
+After the containers start, open:
 
-## Important Tips
+- Streamlit app: `http://localhost:8501`
+- Flask API: `http://localhost:4000`
+- MySQL from your host machine: `localhost:3200`
 
-1. In general, any changes you make to the api code base (REST API) or the Streamlit app code should be *hot reloaded* when the files are saved.  This means that the changes should be immediately available.  
-   1. Don't forget to click the **Always Rerun** button in the browser tab of the Streamlit app for it to reload with changes.
-   1. Sometimes, a bug in the code will shut the containers down.  If this is the case, try and fix the bug in the code.  Then you can restart the `app` container in Docker Desktop or restart all the containers with `docker compose restart` (no *-d* flag).
-1. The MySQL Container is different. 
-   1. When the MySQL container is ***created*** the first time, it will execute any `.sql` files in the `./database-files` folder. **Important:** it will execute them in alphabetical order.  
-   1. The MySQL Container's log files are your friend! Remember, you can access them in Docker Desktop by going to the MySQL Container, and clicking on the `Logs` tab.  If there are errors in your .sql files as it is trying to run them, there will be a message in the logs. You can search 🔍 for `Error` to find them more quickly. 
-   1. If you need to update anything in any of your SQL files, you **MUST** recreate the MySQL container (rather than just stopping and restarting it).  You can recreate the MySQL container by using the following command: `docker compose down db -v && docker compose up db -d`. 
-      1. `docker compose down db -v` stops and deletes the MySQL container and the volume attached to it. 
-      1. `docker compose up db -d` will create a new db container and re-run the files in the `database-files` folder. 
+Useful Docker commands:
 
-## Handling User Role Access and Control
+```bash
+# Start all containers in the background
+docker compose up -d
 
-In most applications, when a user logs in, they assume a particular role in the app. For instance, when one logs in to a stock price prediction app, they may be a single investor, a portfolio manager, or a corporate executive (of a publicly traded company). Each of those _roles_ will likely present some similar features as well as some different features when compared to the other roles. So, how do you accomplish this in Streamlit? This is sometimes called Role-based Access Control, or **RBAC** for short.
+# Stop and remove the containers
+docker compose down
 
-The code in this project demonstrates how to implement a simple RBAC system in Streamlit but without actually using user authentication (usernames and passwords). The Streamlit pages from the original template repo are split up among 3 roles - Political Strategist, USAID Worker, and a System Administrator role (this is used for any sort of system tasks such as re-training ML model, etc.). It also demonstrates how to deploy an ML model.
+# Start only one service, such as db, api, or app
+docker compose up db -d
 
-Wrapping your head around this will take a little time and exploration of this code base. Some highlights are below.
+# Stop containers without deleting them
+docker compose stop
 
-### Getting Started with the RBAC
+# Restart containers after a crash or config change
+docker compose restart
+```
 
-1. We need to turn off the standard panel of links on the left side of the Streamlit app. This is done through the `app/src/.streamlit/config.toml` file. So check that out. We are turning it off so we can control directly what links are shown.
-1. Then I created a new python module in `app/src/modules/nav.py`. When you look at the file, you will see that there are functions for basically each page of the application. The `st.sidebar.page_link(...)` adds a single link to the sidebar. We have a separate function for each page so that we can organize the links/pages by role.
-1. Next, check out the `app/src/Home.py` file. Notice that there are 3 buttons added to the page and when one is clicked, it redirects via `st.switch_page(...)` to that Roles Home page in `app/src/pages`. But before the redirect, I set a few different variables in the Streamlit `session_state` object to track role, first name of the user, and that the user is now authenticated.
-1. Notice near the top of `app/src/Home.py` and all other pages, there is a call to `SideBarLinks(...)` from the `app/src/modules/nav.py` module. This is the function that will use the role set in `session_state` to determine what links to show the user in the sidebar.
-1. The pages are organized by Role. Pages that start with a `0` are related to the _Political Strategist_ role. Pages that start with a `1` are related to the _USAID worker_ role. And, pages that start with a `2` are related to The _System Administrator_ role.
+You can also use Docker Desktop to start, stop, inspect, and view logs for the
+containers.
 
+## Optional Personal Sandbox
 
-## (Completely Optional) Incorporating ML Models into your Project
+The sandbox stack uses alternate host ports so it can run separately from the
+main team stack:
 
-_Note_: This project only contains the infrastructure for a hypothetical ML model.
+```bash
+# Start all sandbox containers in the background
+docker compose -f sandbox.yaml up -d
 
-1. Collect and preprocess necessary datasets for your ML models.
-1. Build, train, and test your ML model in a Jupyter Notebook.
-   - You can store your datasets in the `datasets` folder. You can also store your Jupyter Notebook in the `ml-src` folder.
-1. Once your team is happy with the model's performance, convert your Jupyter Notebook code for the ML model to a pure Python script.
-   - You can include the `training` and `testing` functionality as well as the `prediction` functionality.
-   - Develop and test this pure Python script first in the `ml-src` folder.
-   - You may or may not need to include data cleaning, though.
-1. Review the `api/backend/ml_models` module. In this folder,
-   - We've put a sample (read _fake_) ML model in the `model01.py` file. The `predict` function will be called by the Flask REST API to perform '_real-time_' prediction based on model parameter values that are stored in the database. **Important**: you would never want to hard code the model parameter weights directly in the prediction function.
-1. The prediction route for the REST API is in `api/backend/simple/simple_routes.py`. Basically, it accepts two URL parameters and passes them to the `prediction` function in the `ml_models` module. The `prediction` route/function packages up the value(s) it receives from the model's `predict` function and sends it back to Streamlit as JSON.
-1. Back in Streamlit, check out `app/src/pages/11_Prediction.py`. Here, two numeric input fields are created. When the button is pressed, it makes a request to the REST API at `/prediction/{var_01}/{var_02}` and passes the values from the two inputs as URL path parameters. It gets back the results from the route and displays them.
+# Stop and remove sandbox containers
+docker compose -f sandbox.yaml down
+
+# Start only one sandbox service, such as db, api, or app
+docker compose -f sandbox.yaml up db -d
+
+# Stop sandbox containers without deleting them
+docker compose -f sandbox.yaml stop
+```
+
+Sandbox URLs and ports:
+
+- Streamlit app: `http://localhost:8502`
+- Flask API: `http://localhost:4001`
+- MySQL from your host machine: `localhost:3201`
+
+## Development Notes
+
+- The Streamlit app and Flask API source directories are mounted into their
+  containers, so most code changes hot reload after files are saved.
+- In Streamlit, click **Always Rerun** in the browser when prompted so frontend
+  changes refresh automatically.
+- If a code error causes a container to stop, fix the bug and restart the
+  affected container in Docker Desktop or run `docker compose restart`.
+- The app container talks to the API over the Docker network on port `4000`.
+- The API talks to MySQL using the values in `api/.env`.
+
+## Database Initialization and Reset
+
+When the MySQL container is created for the first time, it runs the SQL files in
+`database-files/` in alphabetical order. The current database is named
+`Northstar` and includes DDL plus sample data for planners, travelers, vendors,
+trips, notifications, promotions, listings, bookings, funding requests,
+preferences, amenities, and votes.
+
+If you change any SQL file in `database-files/`, recreate the MySQL container
+and volume so the initialization scripts run again:
+
+```bash
+docker compose down db -v && docker compose up db -d
+```
+
+For the sandbox stack, use:
+
+```bash
+docker compose -f sandbox.yaml down db -v && docker compose -f sandbox.yaml up db -d
+```
+
+Check the MySQL container logs in Docker Desktop if database initialization
+fails. SQL errors usually appear there.
+
+## Team
+
+NorthStar Travelers:
+
+- Laurence Ehrhardt: Point Person
+- Gaurav Koratagere: Traveler Persona
+- Kavya Karthik: Planner Persona
+- Simon Coleman: Manager Persona
+- Gabrielle Tugano: Vendor Persona
+
+## Course
+
+CS 3200, Northeastern University, Spring 2026.
