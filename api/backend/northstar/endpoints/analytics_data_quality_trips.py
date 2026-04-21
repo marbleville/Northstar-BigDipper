@@ -12,10 +12,13 @@ def get_analytics_data_quality_trips(validated):
             t.start_date,
             t.end_date,
             t.group_size,
+            t.total_spent,
             CASE
                 WHEN t.destination IS NULL OR t.destination = '' THEN 'missing_destination'
                 WHEN t.start_date IS NULL OR t.end_date IS NULL THEN 'missing_dates'
                 WHEN t.start_date > t.end_date THEN 'invalid_date_range'
+                WHEN t.group_size IS NULL THEN 'missing_group_size'
+                WHEN t.total_spent IS NULL THEN 'missing_total_spent'
                 WHEN t.is_active = FALSE AND EXISTS (
                     SELECT 1
                     FROM Booking b
@@ -30,6 +33,8 @@ def get_analytics_data_quality_trips(validated):
             OR t.start_date IS NULL
             OR t.end_date IS NULL
             OR t.start_date > t.end_date
+            OR t.group_size IS NULL
+            OR t.total_spent IS NULL
             OR (
                 t.is_active = FALSE AND EXISTS (
                     SELECT 1
