@@ -65,3 +65,40 @@ def delete_trip_traveler_votes(validated):
         [traveler_id, listing_id],
         name="delete_trip_traveler_vote",
     )
+
+def toggle_save(validated):
+    trip_id     = validated["path"]["trip_id"]
+    traveler_id = validated["path"]["traveler_id"]
+    listing_id  = validated["path"]["listing_id"]
+
+    return make_query(
+        """
+        INSERT INTO Traveler_Vote (traveler_id, listing_id, vote_value, trip_id, saved)
+        VALUES (%s, %s, FALSE, %s, TRUE)
+        ON DUPLICATE KEY UPDATE saved = NOT saved
+        """,
+        [traveler_id, listing_id, trip_id],
+        name="toggle_save",
+    )
+
+
+def get_saves(validated):
+    trip_id     = validated["path"]["trip_id"]
+    traveler_id = validated["path"]["traveler_id"]
+
+    return select_payload(
+        """
+        SELECT
+            tv.listing_id,
+            l.description,
+            l.service_category,
+            l.price,
+            tv.saved
+        FROM Traveler_Vote tv
+        JOIN Listing l ON tv.listing_id = l.listing_id
+        """,
+        filters=(
+            ["tv.traveler_id = %s", "tv.trip_id = %s", "tv.saved = TRUE"],
+            [traveler_id, trip_id],
+        ),
+    )

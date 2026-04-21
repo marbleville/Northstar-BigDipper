@@ -36,3 +36,14 @@ def delete_traveler_detail_route(traveler_id):
         path_values={"traveler_id": traveler_id},
         path_schema=TRAVELER_ID_PATH,
     )
+
+
+@northstar.route("/travelers/<int:traveler_id>/trips", methods=["GET"])
+def get_traveler_trips_route(traveler_id):
+    return handle_request(
+        endpoint="/travelers/{travelerId}/trips",
+        method="GET",
+        handler=endpoint.get_traveler_trips,
+        path_values={"traveler_id": traveler_id},
+        path_schema=TRAVELER_ID_PATH,
+    )

@@ -101,6 +101,23 @@ def manager_home_nav():
                          label="Data Quality Review", icon="🧹")
 
 
+# ---- Role: traveler ---------------------------------------------------------
+
+def traveler_home_nav():
+    st.sidebar.page_link(
+        "pages/17_Traveler_Home.py", label="Traveler Home", icon="🏠"
+    )
+    st.sidebar.page_link(
+        "pages/18_My_Trip.py", label="My Trip", icon="✈️"
+    )
+    st.sidebar.page_link(
+        "pages/19_Browse_And_Save.py", label="Browse & Save", icon="🔍"
+    )
+    st.sidebar.page_link(
+        "pages/22_Preferences_And_Notifications.py", label="Preferences & Alerts", icon="⚙️"
+    )
+
+
 # ---- Sidebar assembly -------------------------------------------------------
 
 def SideBarLinks(show_home=False):
@@ -139,6 +156,8 @@ def SideBarLinks(show_home=False):
             admin_home_nav()
             ml_model_mgmt_nav()
 
+        if st.session_state["role"] == "traveler":
+            traveler_home_nav()
         if st.session_state["role"] == "burton_guster":  # 👈 add this
             vendor_home_nav()
         if st.session_state["role"] == "manager":

@@ -23,7 +23,9 @@ INSERT INTO Trip VALUES
 -- Notification
 INSERT INTO Notification VALUES
 (1, 1, 'Update', 'Trip updated', '2026-04-01', FALSE),
-(2, 2, 'Reminder', 'Booking reminder', '2026-04-02', FALSE);
+(2, 2, 'Reminder', 'Booking reminder', '2026-04-02', FALSE),
+(3, 1, 'Reminder', 'Booking reminder', '2026-04-02', FALSE),
+(4, 1, 'Restaurant Closed', 'Trip Updated', '2026-04-02', FALSE);
 
 -- Promotion
 INSERT INTO Promotion VALUES

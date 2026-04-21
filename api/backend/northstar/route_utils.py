@@ -40,7 +40,8 @@ def handle_request(
         validated = {}
 
         if path_schema is not None:
-            validated["path"] = validate_mapping(path_values or {}, path_schema)
+            validated["path"] = validate_mapping(
+                path_values or {}, path_schema)
 
         active_query_schema = query_schema or EMPTY_SCHEMA
         validated["query"] = validate_mapping(
@@ -75,12 +76,14 @@ def handle_request(
 
 def execute_query_payload(query_payload):
     if not isinstance(query_payload, dict):
-        raise QueryPayloadError("Endpoint handler returned an invalid query payload.")
+        raise QueryPayloadError(
+            "Endpoint handler returned an invalid query payload.")
 
     if "queries" in query_payload:
         queries = query_payload["queries"]
         if not isinstance(queries, (list, tuple)):
-            raise QueryPayloadError("Multi-query payloads must include a query list.")
+            raise QueryPayloadError(
+                "Multi-query payloads must include a query list.")
 
         results = []
         should_commit = False
@@ -128,7 +131,8 @@ def _validate_query(query):
 
     sql = query.get("sql")
     if not isinstance(sql, str) or not sql.strip():
-        raise QueryPayloadError("Each query payload must include a non-empty SQL string.")
+        raise QueryPayloadError(
+            "Each query payload must include a non-empty SQL string.")
 
     params = query.get("params", [])
     if params is None:
