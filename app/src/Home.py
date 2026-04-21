@@ -4,12 +4,13 @@
 ##################################################
 
 # Set up basic logging infrastructure
+from modules.nav import SideBarLinks
+import streamlit as st
 import logging
-logging.basicConfig(format='%(filename)s:%(lineno)s:%(levelname)s -- %(message)s', level=logging.INFO)
+logging.basicConfig(
+    format='%(filename)s:%(lineno)s:%(levelname)s -- %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-import streamlit as st
-from modules.nav import SideBarLinks
 
 st.set_page_config(layout='wide')
 
@@ -54,6 +55,13 @@ if st.button('Act as System Administrator',
     st.session_state['first_name'] = 'SysAdmin'
     st.switch_page('pages/20_Admin_Home.py')
 
+if st.button("Act as Gus, a Vendor",
+             type='primary',
+             use_container_width=True):
+    st.session_state["authenticated"] = True
+    # must match what you put in nav.py
+    st.session_state["role"] = "burton_guster"
+    st.switch_page("pages/01_Vendor.py")
 if st.button('Act as Juliet, a Trip Planner',
              type='primary',
              use_container_width=True):

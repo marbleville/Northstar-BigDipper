@@ -30,7 +30,8 @@ def world_bank_viz_nav():
 
 
 def map_demo_nav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+    st.sidebar.page_link("pages/02_Map_Demo.py",
+                         label="Map Demonstration", icon="🗺️")
 
 
 # ---- Role: usaid_worker -----------------------------------------------------
@@ -42,7 +43,8 @@ def usaid_worker_home_nav():
 
 
 def ngo_directory_nav():
-    st.sidebar.page_link("pages/14_NGO_Directory.py", label="NGO Directory", icon="📁")
+    st.sidebar.page_link("pages/14_NGO_Directory.py",
+                         label="NGO Directory", icon="📁")
 
 
 def add_ngo_nav():
@@ -56,7 +58,8 @@ def prediction_nav():
 
 
 def api_test_nav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
+    st.sidebar.page_link("pages/12_API_Test.py",
+                         label="Test the API", icon="🛜")
 
 
 def classification_nav():
@@ -68,7 +71,8 @@ def classification_nav():
 # ---- Role: administrator ----------------------------------------------------
 
 def admin_home_nav():
-    st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
+    st.sidebar.page_link("pages/20_Admin_Home.py",
+                         label="System Admin", icon="🖥️")
 
 
 def ml_model_mgmt_nav():
@@ -76,14 +80,25 @@ def ml_model_mgmt_nav():
         "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
     )
 
+# ---- Role: Burton Guster ----------------------------------------------------
+
+
+def vendor_home_nav():
+    st.sidebar.page_link("pages/01_Vendor.py",
+                         label="Act as Gus, a Vendor", icon="🥸")
 
 # ---- Role: manager ----------------------------------------------------------
 
+
 def manager_home_nav():
-    st.sidebar.page_link("pages/50_Manager_Home.py", label="Manager Home", icon="🏬")
-    st.sidebar.page_link("pages/51_Manager_Dashboard.py", label="Manager Dashboard", icon="📊")
-    st.sidebar.page_link("pages/52_Vendor_Performance.py", label="Vendor Performance", icon="⭐")
-    st.sidebar.page_link("pages/53_Data_Quality_Review.py", label="Data Quality Review", icon="🧹")
+    st.sidebar.page_link("pages/50_Manager_Home.py",
+                         label="Manager Home", icon="🏬")
+    st.sidebar.page_link("pages/51_Manager_Dashboard.py",
+                         label="Manager Dashboard", icon="📊")
+    st.sidebar.page_link("pages/52_Vendor_Performance.py",
+                         label="Vendor Performance", icon="⭐")
+    st.sidebar.page_link("pages/53_Data_Quality_Review.py",
+                         label="Data Quality Review", icon="🧹")
 
 
 # ---- Sidebar assembly -------------------------------------------------------
@@ -124,6 +139,8 @@ def SideBarLinks(show_home=False):
             admin_home_nav()
             ml_model_mgmt_nav()
 
+        if st.session_state["role"] == "burton_guster":  # 👈 add this
+            vendor_home_nav()
         if st.session_state["role"] == "manager":
             manager_home_nav()
 
