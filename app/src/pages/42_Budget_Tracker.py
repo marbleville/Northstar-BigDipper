@@ -1,9 +1,9 @@
+from modules.nav import SideBarLinks
+import requests
+import streamlit as st
 import logging
 logger = logging.getLogger(__name__)
 
-import streamlit as st
-import requests
-from modules.nav import SideBarLinks
 
 st.set_page_config(layout='wide')
 SideBarLinks()
@@ -44,27 +44,23 @@ try:
 
         # The API returns a multi_query response — get the budget_summary block
         budget = None
-        if isinstance(result, list):
-            for block in result:
-                if isinstance(block, dict) and 'budget_summary' in block.get('name', ''):
-                    budget = block.get('data', [{}])[0]
-                    break
-            if not budget and result:
-                budget = result[0] if isinstance(result[0], dict) else {}
-        elif isinstance(result, dict):
-            budget = result
+        budget = result.get('results', [{}])[0].get('rows', [{}])[0]
 
         if budget:
             col1, col2, col3 = st.columns(3)
-            col1.metric("📊 Estimated Total",  f"${float(budget.get('estimated_total', 0)):,.2f}")
-            col2.metric("✅ Confirmed Total",   f"${float(budget.get('confirmed_total', 0)):,.2f}")
-            col3.metric("💸 Actual Spent",      f"${float(budget.get('actual_spent', 0)):,.2f}")
+            col1.metric("📊 Estimated Total",
+                        f"${float(budget.get('estimated_total') or 0):,.2f}")
+            col2.metric("✅ Confirmed Total",
+                        f"${float(budget.get('confirmed_total') or 0):,.2f}")
+            col3.metric("💸 Actual Spent",
+                        f"${float(budget.get('actual_spent') or 0):,.2f}")
         else:
             st.info("No budget data found for this trip yet.")
 
         # Optionally load breakdown
         if st.checkbox("Show full booking breakdown"):
-            r3 = requests.get(f"{API_BASE}/trips/{trip_id}/budget", params={"include_breakdown": True})
+            r3 = requests.get(f"{API_BASE}/trips/{trip_id}/budget",
+                              params={"include_breakdown": True})
             if r3.status_code == 200:
                 breakdown_result = r3.json()
                 breakdown = None
@@ -86,7 +82,8 @@ st.subheader("Update Actual Amount Spent")
 st.write("Update the recorded amount your team has actually spent on this trip.")
 
 with st.form("update_budget_form"):
-    actual_spent = st.number_input("Actual Amount Spent ($)", min_value=0.0, step=50.0)
+    actual_spent = st.number_input(
+        "Actual Amount Spent ($)", min_value=0.0, step=50.0)
     upd_submitted = st.form_submit_button("Save", type='primary')
 
 if upd_submitted:

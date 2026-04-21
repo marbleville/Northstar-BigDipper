@@ -1,9 +1,9 @@
+from modules.nav import SideBarLinks
+import requests
+import streamlit as st
 import logging
 logger = logging.getLogger(__name__)
 
-import streamlit as st
-import requests
-from modules.nav import SideBarLinks
 
 st.set_page_config(layout='wide')
 SideBarLinks()
@@ -26,15 +26,20 @@ with tab1:
                 # Filters
                 col1, col2 = st.columns(2)
                 with col1:
-                    categories = list(set(l.get('service_category', 'Unknown') for l in listings))
-                    selected_cat = st.selectbox("Filter by Category:", ["All"] + sorted(categories))
+                    categories = list(
+                        set(l.get('service_category', 'Unknown') for l in listings))
+                    selected_cat = st.selectbox("Filter by Category:", [
+                                                "All"] + sorted(categories))
                 with col2:
-                    max_price = st.number_input("Max Price ($):", min_value=0, value=10000, step=100)
+                    max_price = st.number_input(
+                        "Max Price ($):", min_value=0, value=10000, step=100)
 
                 filtered = listings
                 if selected_cat != "All":
-                    filtered = [l for l in filtered if l.get('service_category') == selected_cat]
-                filtered = [l for l in filtered if float(l.get('price', 0)) <= max_price]
+                    filtered = [l for l in filtered if l.get(
+                        'service_category') == selected_cat]
+                filtered = [l for l in filtered if float(
+                    l.get('price', 0)) <= max_price]
 
                 st.write(f"Showing **{len(filtered)}** listings")
                 st.dataframe(filtered, use_container_width=True)
@@ -49,25 +54,43 @@ with tab1:
 with tab2:
     st.subheader("Add a New Listing")
     with st.form("add_listing_form"):
-        service_category = st.selectbox("Category", ["Lodging", "Transportation", "Activity", "Food", "Other"])
-        description      = st.text_area("Description")
-        price            = st.number_input("Price ($)", min_value=0.0, step=10.0)
-        submitted        = st.form_submit_button("Add Listing", type='primary')
+        vendor_id = st.selectbox("Vendor", options=[
+                                 1, 2], format_func=lambda x: "HotelCo" if x == 1 else "FoodieTours")
+        service_category = st.selectbox(
+            "Category", ["Lodging", "Transportation", "Activity", "Food", "Other"])
+        description = st.text_area("Description")
+        price = st.number_input("Price ($)", min_value=0.0, step=10.0)
+        availability = st.selectbox(
+            "Availability", ["Available", "Limited", "Unavailable", "Daily", "Weekly"])
+        operating_hours = st.text_input(
+            "Operating Hours", placeholder="e.g. 9am - 5pm")
+        promotional_notes = st.text_input("Promotional Notes (optional)")
+        listing_status = st.selectbox(
+            "Listing Status", ["Active", "Inactive", "Pending"])
+        submitted = st.form_submit_button("Add Listing", type='primary')
 
     if submitted:
         if not description:
             st.warning("Please enter a description.")
         else:
             payload = {
+                "vendor_id": vendor_id,
                 "service_category": service_category,
-                "description":      description,
-                "price":            price,
+                "description": description,
+                "price": price,
+                "availability": availability,
+                "operating_hours": operating_hours,
+                **({"promotional_notes": promotional_notes} if promotional_notes else {}),
+                "listing_status": listing_status,
+                "is_active": True,
             }
             try:
                 r2 = requests.post(f"{API_BASE}/listings", json=payload)
                 if r2.status_code in (200, 201):
                     st.success("Listing added successfully!")
+                    st.rerun()
                 else:
-                    st.error(f"Failed to add listing. ({r2.status_code}) — {r2.text}")
+                    st.error(
+                        f"Failed to add listing. ({r2.status_code}) — {r2.text}")
             except Exception as e:
                 st.error(f"Error: {e}")
