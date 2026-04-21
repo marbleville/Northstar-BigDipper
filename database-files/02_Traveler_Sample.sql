@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Traveler VALUES
 (1, 'Kyle', 'Hallstone', '210-706-4838', 'khallstone0@cnet.com', '10/19/2025', 'Intuitive', TRUE),
 (2, 'Judi', 'Demougeot', '621-716-3709', 'jdemougeot1@myspace.com', '5/27/2025', 'capability', FALSE),

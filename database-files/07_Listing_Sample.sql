@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Listing VALUES
 (1, 1, 299.99, 4.50, 'active', 'hotel', 'Available', NULL, TRUE, '24/7', 'Downtown boutique hotel', '10% off weekend stays'),
 (2, 2, 499.00, 4.20, 'inactive', 'flight', 'Limited', NULL, FALSE, 'N/A', 'Economy international flight', 'Seasonal discount'),

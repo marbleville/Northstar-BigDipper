@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Notification VALUES
 (1, 1, 'Cross-group', 'Stream music from your device to any speaker wirelessly.', '2026-04-08', FALSE),
 (2, 2, 'Programmable', 'Durable backpack for hiking or travel.', '2025-06-18', TRUE),

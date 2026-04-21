@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Listing_Amenity VALUES
 (1, 'WiFi'),
 (1, 'Breakfast'),

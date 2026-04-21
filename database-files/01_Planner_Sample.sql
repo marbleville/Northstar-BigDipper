@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Planner VALUES
 (1, 'Freida'),
 (2, 'Jami'),

@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Funding_Request VALUES
 (1, 1, 8, '2025-11-01', '2025-11-07', 'Approved', 'Flights, lodging, and aurora tour deposits requested'),
 (2, 2, 5, '2025-09-10', '2025-09-18', 'Pending', 'Mediterranean lodging and local transport estimate'),

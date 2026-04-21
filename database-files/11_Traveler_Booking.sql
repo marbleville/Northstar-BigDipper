@@ -1,3 +1,5 @@
+USE Northstar;
+
 INSERT INTO Traveler_Booking VALUES
 (1, 1),
 (2, 1),
