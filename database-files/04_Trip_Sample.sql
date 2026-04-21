@@ -10,4 +10,8 @@ INSERT INTO Trip VALUES
 (7, 7, 'Patagonia Trek', '2025-08-09', 'Booked', 'South America Expedition', 'El Calafate', 'Argentina', 'South America', 'Adventure', '2025-12-01', '2025-12-12', TRUE, 4600.25, 7),
 (8, 8, 'New York City Break', '2025-09-25', 'Planned', 'Urban Escape', 'New York', 'USA', 'North America', 'City', '2025-11-20', '2025-11-25', TRUE, 1500.00, 2),
 (9, 9, 'Bali Retreat', '2025-02-11', 'Completed', 'Island Relaxation', 'Ubud', 'Indonesia', 'Asia', 'Wellness', '2025-04-01', '2025-04-08', FALSE, 1800.60, 4),
-(10, 10, 'Canadian Rockies Tour', '2025-06-30', 'Booked', 'Mountain Adventure', 'Banff', 'Canada', 'North America', 'Nature', '2025-09-05', '2025-09-14', TRUE, 3100.90, 6);
+(10, 10, 'Canadian Rockies Tour', '2025-06-30', 'Booked', 'Mountain Adventure', 'Banff', 'Canada', 'North America', 'Nature', '2025-09-05', '2025-09-14', TRUE, 3100.90, 6),
+(11, 1, 'Mystery Weekend', '2025-07-18', 'Draft', NULL, 'Boston', 'USA', 'North America', 'Leisure', '2025-10-11', '2025-10-13', TRUE, 650.00, 2),
+(12, 2, 'Undated Conference Trip', '2025-07-20', 'Planned', 'Chicago', 'Chicago', 'USA', 'North America', 'Business', NULL, '2025-11-06', TRUE, 1800.00, 8),
+(13, 3, 'Broken Timeline Retreat', '2025-07-22', 'Planning', 'Miami', 'Miami', 'USA', 'North America', 'Wellness', '2025-12-12', '2025-12-08', TRUE, 1200.00, 5),
+(14, 4, 'Budget Pending Expedition', '2025-07-25', 'Draft', 'Lisbon', 'Lisbon', 'Portugal', 'Europe', 'Cultural', '2025-11-15', '2025-11-20', TRUE, NULL, NULL);
