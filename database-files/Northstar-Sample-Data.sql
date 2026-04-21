@@ -34,17 +34,13 @@ INSERT INTO Promotion VALUES
 
 -- Listing
 INSERT INTO Listing VALUES
-(1, 1, 200.00, 4.5, 'Available', 'Hotel', 'Daily', 'N/A', TRUE, '9-5', 'Nice hotel', 'None'),
-(2, 2, 50.00, 4.2, 'Available', 'Tour', 'Weekly', 'N/A', TRUE, '10-6', 'Food tour', 'Discount included'),
-(3, 1, 45.00, 4.3, 'Available', 'Food', 'Daily', 'N/A', TRUE, '8am-10pm', 'Local food tour', 'Tasty'), 
-(4, 2, 30.00, 4.1, 'Available', 'Activity', 'Daily', 'N/A', TRUE, '9am-6pm', 'City walking tour', 'Great Views'), 
-(5, 1, 150.00, 4.7, 'Available', 'Hotel', 'Daily', 'N/A', TRUE, '24hrs', 'Boutique hotel', 'Beautiful');
-
+(1, 1, 200.00, 4.5, 'Available', 'Hotel', 'Available', 'N/A', TRUE, '9-5', 'Nice hotel', 'None'),
+(2, 2, 50.00, 4.2, 'Available', 'Tour', 'Available', 'N/A', TRUE, '10-6', 'Food tour', 'Discount included');
 
 -- Booking
 INSERT INTO Booking VALUES
-(1, 1, 1, 1, NULL, '2026-04-05', 'Confirmed', TRUE),
-(2, 2, 2, 2, NULL, '2026-04-06', 'Pending', TRUE);
+(1, 1, 1, 1, 1, '2026-04-05', 'Confirmed', TRUE),
+(2, 2, 2, 2, 2, '2026-04-06', 'Pending', TRUE);
 
 -- Funding_Request
 INSERT INTO Funding_Request VALUES
@@ -73,7 +69,5 @@ INSERT INTO Listing_Amenity VALUES
 
 -- Traveler_Vote
 INSERT INTO Traveler_Vote VALUES
-(1, 1, 1, 1, FALSE),
-(2, 2, 1, 2, FALSE),
-(1, 3, 0, 1, FALSE),
-(2, 4, 1, 1, FALSE);
+(1, 1, 5, 1),
+(2, 2, 4, 2);
