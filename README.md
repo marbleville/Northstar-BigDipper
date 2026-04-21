@@ -40,7 +40,6 @@ analytics so travel agencies can plan and manage trips more effectively.
   database. These run in alphabetical order when the database container is first
   created.
 - `datasets/`: Project datasets, if needed.
-- `ml-src/`: Notebooks or scripts for model development, if needed.
 - `docker-compose.yaml`: Team development Docker Compose stack.
 - `sandbox.yaml`: Optional personal sandbox Docker Compose stack with alternate
   host ports.
